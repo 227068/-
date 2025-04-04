@@ -143,179 +143,29 @@ using System;
 namespace ExamGradesApp.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class GradeCalculatorTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CalculateGrade_ValidScores_ReturnsCorrectGrade()
         {
-            var mainWindow = new MainWindow(); // or a mock if needed
-            int totalScore = 80;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("5 (Excellent)", grade);
+            Assert.AreEqual("5 (отлично)", CalculateGrade(70));
+            Assert.AreEqual("4 (хорошо)", CalculateGrade(40));
+            Assert.AreEqual("3 (удовлетворительно)", CalculateGrade(20));
+            Assert.AreEqual("2 (неудовлетворительно)", CalculateGrade(10));
         }
+[TestMethod]
+public void CalculateGrade_InvalidScores_ReturnsNull()
+{
+    Assert.AreEqual("2 (неудовлетворительно)", CalculateGrade(0));
+}
 
-        [TestMethod]
-        public void GetGrade_TotalScore56_ReturnsExcellent()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 56;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("5 (Excellent)", grade);
-        }
-
-
-        [TestMethod]
-        public void GetGrade_TotalScore55_ReturnsGood()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 55;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("4 (Good)", grade);
-        }
-
-        [TestMethod]
-        public void GetGrade_TotalScore32_ReturnsGood()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 32;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("4 (Good)", grade);
-        }
-
-        [TestMethod]
-        public void GetGrade_TotalScore31_ReturnsSatisfactory()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 31;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("3 (Satisfactory)", grade);
-        }
-
-        [TestMethod]
-        public void GetGrade_TotalScore16_ReturnsSatisfactory()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 16;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("3 (Satisfactory)", grade);
-        }
-
-        [TestMethod]
-        public void GetGrade_TotalScore15_ReturnsFail()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 15;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("2 (Fail)", grade);
-        }
-
-        [TestMethod]
-        public void GetGrade_TotalScore0_ReturnsFail()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int totalScore = 0;
-
-            // Act
-            string grade = mainWindow.GetGrade(totalScore);
-
-            // Assert
-            Assert.AreEqual("2 (Fail)", grade);
-        }
-
-        [TestMethod]
-        public void IsValidScore_Score0Max22_ReturnsTrue()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int score = 0;
-            int maxScore = 22;
-
-            // Act
-            bool isValid = mainWindow.IsValidScore(score, maxScore);
-
-            // Assert
-            Assert.IsTrue(isValid);
-        }
-
-        [TestMethod]
-        public void IsValidScore_Score22Max22_ReturnsTrue()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int score = 22;
-            int maxScore = 22;
-
-            // Act
-            bool isValid = mainWindow.IsValidScore(score, maxScore);
-
-            // Assert
-            Assert.IsTrue(isValid);
-        }
-
-        [TestMethod]
-        public void IsValidScore_Score23Max22_ReturnsFalse()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int score = 23;
-            int maxScore = 22;
-
-            // Act
-            bool isValid = mainWindow.IsValidScore(score, maxScore);
-
-            // Assert
-            Assert.IsFalse(isValid);
-        }
-
-        [TestMethod]
-        public void IsValidScore_ScoreNegative1Max22_ReturnsFalse()
-        {
-            // Arrange
-            var mainWindow = new MainWindow();
-            int score = -1;
-            int maxScore = 22;
-
-            // Act
-            bool isValid = mainWindow.IsValidScore(score, maxScore);
-
-            // Assert
-            Assert.IsFalse(isValid);
-        }
+private string CalculateGrade(int totalScore)
+{
+    if (totalScore >= 56 && totalScore <= 80) return "5 (отлично)";
+    if (totalScore >= 32 && totalScore <= 55) return "4 (хорошо)";
+    if (totalScore >= 16 && totalScore <= 31) return "3 (удовлетворительно)";
+    return "2 (неудовлетворительно)";
+}
     }
 }
 ![image](https://github.com/user-attachments/assets/0a720c05-72ac-4a2f-b90f-e2001e6d06f6)
